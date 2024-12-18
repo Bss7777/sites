@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bukhari Security Services</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700');
+        html, body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Quicksand", sans-serif;
+            font-size: 62.5%;
+            background-color: #fff;
+        }
+
+        /* Navbar section */
+        .nav {
+            width: 100%;
+            height: 65px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            line-height: 65px;
+            text-align: center;
+            background-color: transparent;
+            transition: all 0.4s ease;
+        }
+
+        .nav.affix {
+            background-color: #111;
+            padding: 0;
+        }
+
+        .nav div.logo {
+            float: left;
+            padding-left: 3rem;
+        }
+
+        .nav div.logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .nav div.main_list {
+            float: right;
+            height: 65px;
+        }
+
+        .nav div.main_list ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav div.main_list ul li {
+            padding-right: 3rem;
+        }
+
+        .nav div.main_list ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 2.4rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav div.main_list ul li a:hover {
+            color: #00E676;
+        }
+
+        .navTrigger {
+            display: none;
+            cursor: pointer;
+            width: 30px;
+            height: 25px;
+            position: absolute;
+            right: 30px;
+            top: 20px;
+        }
+
+        .navTrigger i {
+            background-color: #fff;
+            border-radius: 2px;
+            display: block;
+            width: 100%;
+            height: 4px;
+            margin-bottom: 5px;
+            transition: all 0.4s ease;
+        }
+
+        .navTrigger.active i:nth-child(1) {
+            transform: translateY(9px) rotate(135deg);
+        }
+
+        .navTrigger.active i:nth-child(2) {
+            opacity: 0;
+        }
+
+        .navTrigger.active i:nth-child(3) {
+            transform: translateY(-9px) rotate(-135deg);
+        }
+
+        @media screen and (max-width: 768px) {
+            .navTrigger {
+                display: block;
+            }
+
+            .nav div.main_list {
+                height: 0;
+                overflow: hidden;
+                transition: height 0.4s ease;
+            }
+
+            .nav div.main_list.show_list {
+                height: auto;
+            }
+
+            .nav div.main_list ul {
+                flex-direction: column;
+                background-color: #111;
+                padding: 0;
+            }
+
+            .nav div.main_list ul li {
+                text-align: center;
+                padding: 1.5rem 0;
+            }
+
+            .nav div.main_list ul li a {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Home section */
+        .home {
+            width: 100%;
+            height: 100vh;
+            background-image: url('images/main-2.png');
+            background-position: center top;
+            background-size: cover;
+        }
+
+        /* Card section */
+        .card-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 50px;
+        }
+
+        .card {
+            position: relative;
+            width: 30%;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover img {
+            transform: scale(1.1);
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover .overlay {
+            opacity: 1;
+        }
+
+        .overlay p {
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        /* Registered logos section */
+        .registeredlogos {
+            margin-left: 27%;
+            background-color: #fff;
+            margin-top: 30%;
+        }
+
+        .slider {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        .slider-track {
+            display: flex;
+            width: calc(250px * 6);
+            animation: scroll 15s linear infinite;
+        }
+        .slide {
+            min-width: 250px;
+            margin: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .slide img {
+            width: 250px;
+            height: 250px;
+            object-fit: contain;
+        }
+
+        @keyframes scroll {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-100%);
+            }
+        }
+
+        .ALL{
+       margin-left: 1%;
+       margin-top: 6%;
+        }
+
+        .TEXT{
+            text-align: center;
+            font-size: 35px;
+        }
+
+       
+#slidy-container { 
+    width: 70%;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+/*
+What do we have here? A set of three responsive footers, 2, 3 and 4 columns each.
+In order to make it easier to implement a preferred footer into your project, I decided to keep all the necessary styles right into their sections without putting common styles apart.
+This entails some things that otherwise wouldn't've been considered elegant for this project itself, like IDs duplication, code overuse and so forth.
+There are only three selectors which are common for all the footers below. Don't forget to transfer them to your project. They go right below this description.
+After that, you can simply copy the code from the section with your footer - there's all styles you need.
+Thank you for your interest.
+*/
+
+
+/*============ COMMON STYLES. DON'T FORGET TO COPY THEM AS WELL! ===========*/
+
+footer.site-footer {
+    padding: 60px 30px;
+    background: #222222;
+    color: #999999;
+    font-size: 10pt;
+}
+
+div#footer-container {
+    width: 768px;
+    margin: 0 auto;
+    transition: all 0.2s ease;
+}
+
+div#footer-grid {
+    display: flex;
+    align-items: stretch;
+    padding-bottom: 60px;
+}
+
+
+
+
+
+
+
+/*============ footer 2 columns ===========*/
+
+footer#footer-2-cols div#left-footer-section {
+    flex-basis: 50%;
+    border-right: 1px solid #444444;
+    padding-right: 30px;
+}
+
+footer#footer-2-cols div#right-footer-section {
+    flex-basis: 50%;
+}
+
+footer#footer-2-cols div#copyright-information div#footer-logo-section {
+    display: flex;
+    align-items: center;
+}
+
+footer#footer-2-cols div#copyright-information div#footer-logo {
+    width: 30px;
+    margin-right: 30px;
+}
+
+footer#footer-2-cols div#footer-search input {
+    font-family: "Open Sans", sans-serif;
+    border: 2px solid #999999;
+    background: #2a2a2a;
+    outline: none;
+    color: #999999;
+    padding: 2px;
+}
+
+footer#footer-2-cols div#footer-search button {
+    font-family: "Open Sans", sans-serif;
+    border: 2px solid #999999;
+    background: transparent;
+    color: #cecece;
+    padding: 2px 10px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+footer#footer-2-cols div#footer-search button:hover {
+    background: #cecece;
+    color: #666666;
+    border: 2px solid #666666;
+    transition: all 0.25s ease;
+}
+
+footer#footer-2-cols div#footer-search button:active {
+    position: relative;
+    top: 1px;
+}
+
+footer#footer-2-cols div#footer-logo img {
+    width: 100%;
+}
+
+footer#footer-2-cols div.footer-information p {
+    margin-top: 10px;
+}
+
+footer#footer-2-cols div.footer-information p:first-child {
+    margin-top: 30px;
+}
+
+footer#footer-2-cols div.footer-information p:last-child {
+    margin-bottom: 0;
+}
+
+footer#footer-2-cols div.footer-information p img {
+    margin-right: 0.75em;
+}
+
+footer#footer-2-cols div#right-footer-section ul {
+    margin: 0;
+}
+
+footer#footer-2-cols div.footer-links ul li, footer#footer-2-cols div.footer-links ul li a  {
+    list-style: none;
+    color: #999999;
+    line-height: 1.38em;
+    margin-bottom: 1em;
+}
+
+footer#footer-2-cols div.footer-links ul li:last-child, footer#footer-2-cols div.footer-links ul li a:last-child  {
+    margin-bottom: 0;
+}
+
+footer#footer-2-cols div#right-footer-section ul li a:hover {
+    color: #00bdc6;
+    transition: all 0.2s ease;
+}
+
+footer#footer-2-cols div#copyright-information {
+    border-top: 1px solid #444444;
+    padding: 30px 0 0 0;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+footer#footer-2-cols div#copyright-information div#social-buttons {
+    margin-left: auto;
+}
+
+footer#footer-2-cols div#copyright-information div#social-buttons img {
+    margin-left: 0.68em;
+    cursor: pointer;
+    font-size: 14pt;
+}
+
+footer#footer-2-cols div#copyright-information div#social-buttons i.fa:hover {
+    color: #666666;
+    transition: all 0.2s ease;
+}
+
+
+/*==== media queries for footer-2-columns ====*/
+
+@media screen and (max-width: 960px){
+
+    div#footer-container {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    div#footer-grid {
+        flex-direction: column;
+        width: 480px;
+        margin: 0 auto;
+        padding-bottom: 30px;
+    }
+
+    footer#footer-2-cols div#left-footer-section {
+        border-right: 0;
+        padding-bottom: 30px;
+    }
+
+    footer#footer-2-cols div.footer-section {
+        padding-top: 30px;
+    }
+
+    footer#footer-2-cols div.footer-section:first-child {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    footer#footer-2-cols div#right-footer-section ul {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        font-size: 11pt;
+    }
+
+    footer#footer-2-cols div#right-footer-section ul li {
+        margin: 0;
+    }
+
+    footer#footer-2-cols div#right-footer-section ul li a {
+        margin: 0;
+        display: block;
+        padding: 15px;
+        background: #2a2a2a;
+        border-bottom: 1px solid #444444;
+        text-decoration: none;
+    }
+
+    footer#footer-2-cols div#right-footer-section ul li:last-child a {
+        border-bottom: none;
+    }
+
+    footer#footer-2-cols div#footer-search input {
+        width: calc(100% - 77px);
+    }
+
+    footer#footer-2-cols div#copyright-information {
+        display: block;
+        width: 480px;
+        margin: 0 auto;
+    }
+
+    footer#footer-2-cols div#copyright-information div#social-buttons {
+        padding: 15px 0;
+    }
+
+    footer#footer-2-cols div#copyright-information div#social-buttons i.fa:first-child {
+        margin-left: 0;
+    }
+
+    footer#footer-2-cols div#copyright-information div#footer-logo-section {
+        display: block;
+        align-items: normal;
+    }
+
+    footer#footer-2-cols div#copyright-information div#footer-logo {
+        display: block;
+        width: 100%;
+        margin: 0;
+    }
+
+    footer#footer-2-cols div#copyright-information div#footer-logo img {
+        width: 30px;
+        text-align: center;
+    }
+
+    footer#footer-2-cols div#copyright-information div#copyright-text {
+        display: block;
+        text-align: center;
+        padding: 15px 0;
+    }
+
+    footer#footer-2-cols div#copyright-information div#social-buttons i.fa {
+        font-size: 24pt;
+    }
+}
+
+@media screen and (max-width: 576px) {
+
+    div#footer-grid {
+        width: 100%;
+    }
+
+    footer#footer-2-cols div#footer-search input {
+        width: calc(100% - 77px);
+    }
+
+    footer#footer-2-cols div.footer-information {
+        margin: 0 auto;
+    }
+
+    footer#footer-2-cols div#copyright-information {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    footer#footer-2-cols div#copyright-information div#copyright-text {
+        width: 100%;
+    }
+
+    footer#footer-2-cols div#copyright-information div#social-buttons {
+        width: 100%;
+    }
+}
+
+
+
+
+
+
+
+/*============ footer 3 columns ===========*/
+
+footer#footer-3-cols div#left-footer-section {
+    flex-basis: 33.33%;
+    border-right: 1px solid #444444;
+    padding-right: 30px;
+}
+
+footer#footer-3-cols div#second-footer-section {
+    flex-basis: 33.33%;
+    border-right: 1px solid #444444;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+footer#footer-3-cols div#right-footer-section {
+    flex-basis: 33.33%;
+    padding-left: 30px;
+}
+
+footer#footer-3-cols div#footer-logo-section {
+    display: flex;
+    align-items: center;
+}
+
+footer#footer-3-cols div#footer-logo {
+    width: 30px;
+    margin-right: 30px;
+}
+
+footer#footer-3-cols div#footer-search input {
+    font-family: "Open Sans", sans-serif;
+    border: 2px solid #999999;
+    background: #2a2a2a;
+    outline: none;
+    color: #999999;
+    padding: 2px;
+    width: 130px;
+}
+
+footer#footer-3-cols div#footer-search button {
+    font-family: "Open Sans", sans-serif;
+    border: 2px solid #999999;
+    background: transparent;
+    color: #cecece;
+    padding: 2px 10px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+footer#footer-3-cols div#footer-search button:hover {
+    background: #cecece;
+    color: #666666;
+    border: 2px solid #666666;
+    transition: all 0.25s ease;
+}
+
+footer#footer-3-cols div#footer-search button:active {
+    position: relative;
+    top: 1px;
+}
+
+footer#footer-3-cols div.footer-section h3 {
+    margin: 0;
+    margin-bottom: 30px;
+    font-size: 12pt;
+}
+
+footer#footer-3-cols div#footer-logo img {
+    width: 100%;
+}
+
+footer#footer-3-cols div.footer-information p {
+    margin-top: 10px;
+}
+
+footer#footer-3-cols div.footer-information p:first-child {
+    margin-top: 30px;
+}
+
+footer#footer-3-cols div.footer-information p:last-child {
+    margin-bottom: 0;
+}
+
+footer#footer-3-cols div.footer-information p img {
+    margin-right: 0.75em;
+}
+
+
+footer#footer-3-cols div.footer-section ul {
+    margin-top: 15px;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+footer#footer-3-cols div.footer-links ul li, footer#footer-3-cols div.footer-links ul li a   {
+    list-style: none;
+    color: #999999;
+    line-height: 1.38em;
+    margin-bottom: 1em;
+}
+
+footer#footer-3-cols div.footer-links ul li:last-child, footer#footer-3-cols div.footer-links ul li a:last-child   {
+    margin-bottom: 0;
+}
+
+footer#footer-3-cols div.footer-section ul li a:hover {
+    color:#00bdc6;
+    transition: all 0.2s ease;
+}
+
+footer#footer-3-cols div#copyright-information {
+    border-top: 1px solid #444444;
+    padding: 30px 0 0 0;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+footer#footer-3-cols div#copyright-information div#social-buttons {
+    margin-left: auto;
+
+}
+
+footer#footer-3-cols div#copyright-information div#social-buttons img {
+    margin-left: 0.68em;
+    cursor: pointer;
+    font-size: 14pt;
+}
+
+
+/*==== media queries for footer-3-columns ====*/
+
+@media screen and (max-width: 960px){
+
+    div#footer-container {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    div#footer-grid {
+        flex-direction: column;
+        width: 480px;
+        margin: 0 auto;
+        padding-bottom: 60px;
+    }
+
+    footer#footer-3-cols div#left-footer-section {
+        border-right: 0;
+        padding-bottom: 30px;
+    }
+
+    footer#footer-3-cols div#second-footer-section {
+        border-right: none;
+        padding-left: 0;
+        padding-right: 0;
+        padding-bottom: 30px;
+
+    }
+
+    footer#footer-3-cols div.footer-section {
+        padding-top: 30px;
+    }
+
+    footer#footer-3-cols div.footer-section h3 {
+        text-align: center;
+    }
+
+    footer#footer-3-cols div.footer-section:first-child {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    footer#footer-3-cols div#right-footer-section {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    footer#footer-3-cols div#second-footer-section ul,
+    footer#footer-3-cols div#right-footer-section ul {
+        margin: 0;
+        padding: 0;
+        font-size: 11pt;
+        text-align: center;
+    }
+
+    footer#footer-3-cols div.footer-links ul li {
+        margin: 0;
+    }
+
+    footer#footer-3-cols div.footer-links ul li a {
+        margin: 0;
+        display: block;
+        padding: 15px;
+        background: #2a2a2a;
+        border-bottom: 1px solid #444444;
+        text-decoration: none;
+
+    }
+
+    footer#footer-3-cols div.footer-links ul li:last-child a {
+        border-bottom: none;
+    }
+
+    footer#footer-3-cols div#footer-search input {
+        width: calc(100% - 77px);
+    }
+
+    footer#footer-3-cols div#copyright-information {
+        display: block;
+        width: 480px;
+        margin: 0 auto;
+    }
+
+    footer#footer-3-cols div#copyright-information div#social-buttons {
+        padding: 15px 0;
+    }
+
+    footer#footer-3-cols div#copyright-information div#social-buttons img:first-child {
+        margin-left: 0;
+    }
+
+    footer#footer-3-cols div#copyright-information div#footer-logo-section {
+        display: block;
+        align-items: normal;
+    }
+
+    footer#footer-3-cols div#copyright-information div#footer-logo {
+        display: block;
+        width: 100%;
+        margin: 0;
+    }
+
+    footer#footer-3-cols div#copyright-information div#footer-logo img {
+        width: 30px;
+        text-align: center;
+    }
+
+    footer#footer-3-cols div#copyright-information div#copyright-text {
+        display: block;
+        text-align: center;
+        padding: 15px 0;
+    }
+
+    footer#footer-3-cols div#copyright-information div#social-buttons i.fa {
+        font-size: 24pt;
+    }
+}
+
+@media screen and (max-width: 576px) {
+
+    div#footer-grid {
+        width: 100%;
+    }
+
+    footer#footer-3-cols div#footer-search input {
+        width: calc(100% - 77px);
+    }
+
+    footer#footer-3-cols div.footer-information {
+        margin: 0 auto;
+    }
+
+    footer#footer-3-cols div#copyright-information {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    footer#footer-3-cols div#copyright-information div#copyright-text {
+        width: 100%;
+    }
+
+    footer#footer-3-cols div#copyright-information div#social-buttons {
+        width: 100%;
+    }
+}
+
+
+
+
+
+
+
+/*============ footer 4 columns ===========*/
+
+footer#footer-4-cols div#left-footer-section {
+    flex-basis: 33.33%;
+    padding-right: 20px;
+}
+
+footer#footer-4-cols div#first-footer-section {
+    flex-basis: 22.22%;
+    border-right: 1px solid #444444;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+footer#footer-4-cols div#second-footer-section {
+    flex-basis: 22.22%;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+footer#footer-4-cols div#right-footer-section {
+    flex-basis: 22.22%;
+    padding-left: 20px;
+}
+
+footer#footer-4-cols div#footer-logo-section {
+    display: flex;
+    align-items: center;
+}
+
+footer#footer-4-cols div#footer-logo {
+    width: 30px;
+    margin-right: 30px;
+}
+
+footer#footer-4-cols div#footer-search input {
+    font-family: "Open Sans", sans-serif;
+    border: 2px solid #999999;
+    background: #2a2a2a;
+    outline: none;
+    color: #999999;
+    padding: 2px;
+    width: 130px;
+}
+
+footer#footer-4-cols div#footer-search button {
+    font-family: "Open Sans", sans-serif;
+    border: 2px solid #999999;
+    background: transparent;
+    color: #cecece;
+    padding: 2px 10px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+footer#footer-4-cols div#footer-search button:hover {
+    background: #cecece;
+    color: #666666;
+    border: 2px solid #666666;
+    transition: all 0.25s ease;
+}
+
+footer#footer-4-cols div#footer-search button:active {
+    position: relative;
+    top: 1px;
+}
+
+footer#footer-4-cols div.footer-section h3 {
+    margin: 0;
+    margin-bottom: 30px;
+    font-size: 12pt;
+}
+
+footer#footer-4-cols div#footer-logo img {
+    width: 100%;
+}
+
+footer#footer-4-cols div.footer-information p {
+    margin-top: 10px;
+}
+
+footer#footer-4-cols div.footer-information p:first-child {
+    margin-top: 30px;
+}
+
+footer#footer-4-cols div.footer-information p:last-child {
+    margin-bottom: 0;
+}
+
+footer#footer-4-cols div.footer-information p img {
+    margin-right: 0.75em;
+}
+
+footer#footer-4-cols div.footer-tags a.footer-tag {
+    text-decoration: none;
+    color: #999999;
+    border: 1px solid #666666;
+    background: #282828;
+    padding: 0.2em 0.38em;
+    margin: 0 0.68em 0.68em 0;
+    display: block;
+    float: left;
+    font-size: 9pt;
+    font-style: italic;
+}
+
+footer#footer-4-cols div.footer-tags a.footer-tag:hover {
+    background: #666666;
+    color: #282828;
+    transition: all 0.2s ease;
+}
+
+footer#footer-4-cols div.footer-section ul {
+    margin-top: 15px;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+footer#footer-4-cols div.footer-links ul li, footer#footer-4-cols div.footer-links ul li a   {
+    list-style: none;
+    color: #999999;
+    line-height: 1.38em;
+    margin-bottom: 1em;
+}
+
+footer#footer-4-cols div.footer-links ul li:last-child, footer#footer-4-cols div.footer-links ul li a:last-child   {
+    margin-bottom: 0;
+}
+
+footer#footer-4-cols div.footer-section ul li a:hover {
+    color:#00bdc6;
+    transition: all 0.2s ease;
+}
+
+footer#footer-4-cols div#copyright-information {
+    border-top: 1px solid #444444;
+    padding: 30px 0 0 0;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+footer#footer-4-cols div#copyright-information div#social-buttons {
+    margin-left: auto;
+
+}
+
+footer#footer-4-cols div#copyright-information div#social-buttons img {
+    margin-left: 0.68em;
+    cursor: pointer;
+    font-size: 14pt;
+}
+
+
+
+
+/*==== media queries for footer-4-columns ====*/
+
+@media screen and (max-width: 960px){
+
+    div#footer-container {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    div#footer-grid {
+        flex-direction: column;
+        width: 480px;
+        margin: 0 auto;
+        padding-bottom: 60px;
+    }
+
+    footer#footer-4-cols div#left-footer-section {
+        border-right: 0;
+        padding-bottom: 30px;
+    }
+
+    footer#footer-4-cols div#second-footer-section {
+        border-right: none;
+        padding-left: 0;
+        padding-right: 0;
+        padding-bottom: 30px;
+    }
+
+    footer#footer-4-cols div.footer-section {
+        padding-top: 30px;
+    }
+
+    footer#footer-4-cols div.footer-section h3 {
+        text-align: center;
+    }
+
+    footer#footer-4-cols div.footer-section:first-child {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    footer#footer-4-cols div#first-footer-section {
+        padding-left: 0;
+        padding-right: 0;
+        padding-bottom: 30px;
+        border-right: none;
+    }
+
+    footer#footer-4-cols div.footer-tags a.footer-tag {
+        font-size: 11pt;
+        padding: 0.32em 0.5em;
+    }
+
+    footer#footer-4-cols div#right-footer-section {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    footer#footer-4-cols div#second-footer-section ul,
+    footer#footer-4-cols div#right-footer-section ul {
+        margin: 0;
+        padding: 0;
+        font-size: 11pt;
+        text-align: center;
+    }
+
+    footer#footer-4-cols div.footer-links ul li {
+        margin: 0;
+    }
+
+    footer#footer-4-cols div.footer-links ul li a {
+        margin: 0;
+        display: block;
+        padding: 15px;
+        background: #2a2a2a;
+        border-bottom: 1px solid #444444;
+        text-decoration: none;
+    }
+
+    footer#footer-4-cols div.footer-links ul li:last-child a {
+        border-bottom: none;
+    }
+
+    footer#footer-4-cols div#footer-search input {
+        width: calc(100% - 77px);
+    }
+
+    footer#footer-4-cols div#copyright-information {
+        display: block;
+        width: 480px;
+        margin: 0 auto;
+    }
+
+    footer#footer-4-cols div#copyright-information div#social-buttons {
+        padding: 15px 0;
+    }
+
+    footer#footer-4-cols div#copyright-information div#social-buttons i.fa:first-child {
+        margin-left: 0;
+    }
+
+    footer#footer-4-cols div#copyright-information div#footer-logo-section {
+        display: block;
+        align-items: normal;
+    }
+
+    footer#footer-4-cols div#copyright-information div#footer-logo {
+        display: block;
+        width: 100%;
+        margin: 0;
+    }
+
+    footer#footer-4-cols div#copyright-information div#footer-logo img {
+        width: 30px;
+        text-align: center;
+    }
+
+    footer#footer-4-cols div#copyright-information div#copyright-text {
+        display: block;
+        text-align: center;
+        padding: 15px 0;
+    }
+
+    footer#footer-4-cols div#copyright-information div#social-buttons i.fa {
+        font-size: 24pt;
+    }
+}
+
+@media screen and (max-width: 576px) {
+
+    div#footer-grid {
+        width: 100%;
+    }
+
+    footer#footer-4-cols div#footer-search input {
+        width: calc(100% - 77px);
+    }
+
+    footer#footer-4-cols div.footer-information {
+        margin: 0 auto;
+    }
+
+    footer#footer-4-cols div#copyright-information {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    footer#footer-4-cols div#copyright-information div#copyright-text {
+        width: 100%;
+    }
+
+    footer#footer-4-cols div#copyright-information div#social-buttons {
+        width: 100%;
+    }
+}
+
+
+
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="container">
+            <div class="logo">
+                <img src="IMAGES/LOGO.png" alt="Logo">
+            </div>
+            <div id="mainListDiv" class="main_list">
+                <ul class="navlinks">
+                    <li><a href="#">CONTACT : +92-3347537858</a></li>
+                    
+                </ul>
+            </div>
+            <span class="navTrigger">
+                <i></i>
+                <i></i>
+                <i></i>
+            </span>
+        </div>
+    </nav>
+
+    <section class="home"></section>
+
+    <div class="card-container">
+        <div class="card">
+            "images"
+           <a href="A-D.HTML"><img src="images/umer/images/Arrival-departure.jpg" alt="Image 1">
+            <div class="overlay">
+                <p>Arrival & departure</p>
+            </div>
+        </div></a>
+        <div class="card">
+            <a href="BULLETPROOF.HTML"><img src="images/umer/images/bullet-proof.jpg" alt="Image 1">
+            <div class="overlay">
+                <p>Bullet proof</p>
+            </div>
+        </div>
+        <div class="card">
+            <a href="CLIENTPERS.HTML"><img src="images/umer/images/client-personal.jpg" alt="Image 1">
+            <div class="overlay">
+                <p>Client personal</p>
+            </div>
+        </div>
+    </div>
+<br>
+<br>
+<br>
+<br>
+
+<div class="TEXT">
+    <h1>WE HAVE HAD THE PRIVILEGE OF SERVING THE FOLLOWING DISTINGUISHED CLIENTS</h1>
+</div>
+
+    <div class="ALL">
+        <div class="slider">
+            <div class="slider-track">
+                <div class="slide"><img src="images/noor.png" alt="Image 1"></div>
+                <div class="slide"><img src="images/Altas.png" alt="Image 2"></div>
+                <div class="slide"><img src="images/umer/client-logo/bakers.jpg" alt="Image 3"></div>
+                <div class="slide"><img src="images/umer/client-logo/daily doze.jfif" alt="Image 4"></div>
+                <div class="slide"><img src="images/europcar.png" alt="Image 5"></div>
+                <div class="slide"><img src="images/umer/client-logo/Hascol.jpg" alt="Image 6"></div>
+                <div class="slide"><img src="images/umer/client-logo/HEI new logo.jpg" alt="Image 1"></div>
+                <div class="slide"><img src="images/umer/client-logo/noor textile.jpg" alt="Image 3"></div>
+                <div class="slide"><img src="images/umer/client-logo/Peas.jfif" alt="Image 4"></div>
+                <div class="slide"><img src="images/umer/client-logo/szabist.jpg" alt="Image 5"></div>
+                <div class="slide"><img src="images/umer/client-logo/turkey.jpg" alt="Image 6"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="slidy-container">
+        <figure id="slidy">
+          <img src="images/SLIDER1.png" alt="eyes" >
+          <img src="images/SLIDER2.png" alt="lou" >
+          <img src="images/SLIDER3.png" alt="lucie-2" >
+        </figure>
+      </div>
+
+    <div class="registeredlogos">
+        <img src="images/REGISTERED.png" alt="Registered Logos">
+    </div>
+    <footer id="footer-2-cols" class="site-footer">
+        <div id="footer-container">
+            <div id="footer-grid">
+                <div id="left-footer-section" class="footer-section">
+                    <address class="footer-information">
+                        <p><img src="https://img.icons8.com/ios-filled/12/999999/marker.png" alt="Location"> 5/12, Mehmoodabad, Karachi, Pakistan</p>
+                        <p><img src="https://img.icons8.com/ios-filled/12/999999/phone.png" alt="Phone"> 7 (800) 555–35–35</p>
+                        <p><img src="https://img.icons8.com/ios-filled/12/999999/mail.png" alt="Email"> bukharisecurities@gmail.com</p>
+                        <p><img src="https://img.icons8.com/ios-filled/12/999999/clock.png" alt="Hours"> 8:00 AM – 8:00 PM</p>
+                    </address>
+                </div>
+                <div id="right-footer-section" class="footer-section">
+                    <nav class="footer-links" aria-label="Footer Navigation">
+                        <ul>
+                           
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div id="copyright-information">
+                <div id="footer-logo-section">
+                    <div id="footer-logo">
+                        <img src="https://raw.githubusercontent.com/taviskaron/2-3-4-column-footers/main/img/logo.png" alt="Logo">
+                    </div>
+                </div>
+                <img src="images/LOGO.png" alt="" style="height: 80px; width: 80px;">
+               
+            </div>
+        </div>
+    </footer>
+    
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        $(window).scroll(function() {
+            if ($(document).scrollTop() > 50) {
+                $('.nav').addClass('affix');
+            } else {
+                $('.nav').removeClass('affix');
+            }
+        });
+
+        $('.navTrigger').click(function () {
+            $(this).toggleClass('active');
+            $('#mainListDiv').toggleClass('show_list');
+        });
+
+        /* user defined variables */
+var timeOnSlide = 3, 		
+    // the time each image will remain static on the screen, measured in seconds
+timeBetweenSlides = 1, 	
+    // the time taken to transition between images, measured in seconds
+
+// test if the browser supports animation, and if it needs a vendor prefix to do so
+    animationstring = 'animation',
+    animation = false,
+    keyframeprefix = '',
+    domPrefixes = 'Webkit Moz O Khtml'.split(' '), 
+    // array of possible vendor prefixes
+    pfx  = '',
+    slidy = document.getElementById("slidy"); 
+if (slidy.style.animationName !== undefined) { animation = true; } 
+// browser supports keyframe animation w/o prefixes
+
+if( animation === false ) {
+  for( var i = 0; i < domPrefixes.length; i++ ) {
+    if( slidy.style[ domPrefixes[i] + 'AnimationName' ] !== undefined ) {
+      pfx = domPrefixes[ i ];
+      animationstring = pfx + 'Animation';
+      keyframeprefix = '-' + pfx.toLowerCase() + '-';
+      animation = true;
+      break;
+    }
+  }
+}
+
+if( animation === false ) {
+  // animate in JavaScript fallback
+} else {
+  var images = slidy.getElementsByTagName("img"),
+      firstImg = images[0], 
+      // get the first image inside the "slidy" element.
+      imgWrap = firstImg.cloneNode(false);  // copy it.
+  slidy.appendChild(imgWrap); // add the clone to the end of the images
+  var imgCount = images.length, // count the number of images in the slide, including the new cloned element
+      totalTime = (timeOnSlide + timeBetweenSlides) * (imgCount - 1), // calculate the total length of the animation by multiplying the number of _actual_ images by the amount of time for both static display of each image and motion between them
+      slideRatio = (timeOnSlide / totalTime)*100, // determine the percentage of time an induvidual image is held static during the animation
+      moveRatio = (timeBetweenSlides / totalTime)*100, // determine the percentage of time for an individual movement
+      basePercentage = 100/imgCount, // work out how wide each image should be in the slidy, as a percentage.
+      position = 0, // set the initial position of the slidy element
+      css = document.createElement("style"); // start marking a new style sheet
+  css.type = "text/css";
+  css.innerHTML += "#slidy { text-align: left; margin: 0; font-size: 0; position: relative; width: " + (imgCount * 100) + "%;  }\n"; // set the width for the slidy container
+  css.innerHTML += "#slidy img { float: left; width: " + basePercentage + "%; }\n";
+  css.innerHTML += "@"+keyframeprefix+"keyframes slidy {\n"; 
+  for (i=0;i<(imgCount-1); i++) { // 
+    position+= slideRatio; // make the keyframe the position of the image
+    css.innerHTML += position+"% { left: -"+(i * 100)+"%; }\n";
+    position += moveRatio; // make the postion for the _next_ slide
+    css.innerHTML += position+"% { left: -"+((i+1) * 100)+"%; }\n";
+}
+  css.innerHTML += "}\n";
+  css.innerHTML += "#slidy { left: 0%; "+keyframeprefix+"transform: translate3d(0,0,0); "+keyframeprefix+"animation: "+totalTime+"s slidy infinite; }\n"; // call on the completed keyframe animation sequence
+document.body.appendChild(css); // add the new stylesheet to the end of the document
+}
+
+
+    </script>
+</body>
+</html>
